@@ -1,0 +1,9 @@
+a9f0861f9468d5f97b41a4f81221081e *DESCRIPTION
+5e0b40572f8bf634e6272c8e860f9e22 *NAMESPACE
+1063b4ac6ec80134e631d673472533f8 *R/PieceExpIntensity.R
+39b506f3e1ede13c98b13fbcc87e5fe6 *R/PieceExpIntensity1.R
+721f51ae452dcbaf01d34b5a9ba9ce0e *R/RcppExports.R
+2f2a16383b82fb8d487185b2297585db *man/PieceExpIntensity.Rd
+945fbfb0df864a69a2c9fcb99e2a3a3d *man/PieceExpIntensity1.Rd
+de572e7c9692808b470e1a8e60793627 *src/PieceRATE13.cpp
+7025e682d57b5ce9a05c67186afd0078 *src/RcppExports.cpp
