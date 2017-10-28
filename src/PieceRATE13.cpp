@@ -16,6 +16,7 @@
 
 
 
+
 using namespace Rcpp;
 
 
@@ -26,7 +27,7 @@ using namespace Rcpp;
 //Returns the maximum from a vector
 double MaxVec(arma::vec Y){
   int J1=Y.n_rows;
-  int j;
+  int j=0;
   double max=Y[0];
   for(j=1;j<J1;j++){
     if(Y[j]>max){
@@ -66,9 +67,11 @@ double max1(double a, double b){
 double cumsumlog(int Rate){
   double Prod =0;
   int m=1;
+  double m1=1;
 
   for(m=2;m<(Rate+1);m++){
-    Prod = Prod + log(m);
+    m1=m;
+    Prod = Prod + log(m1);
   }
 
   return(Prod);
@@ -94,6 +97,8 @@ double Like( arma::vec Y, //Survival Times
 arma::vec sum1(J+1);
 sum1.zeros();
 
+double m1=0;
+
     //Cycle through each interval and obtain survival estimates and add hazard heights
   for(l=0; l<(J+1);l++){
     for(m=0; m<Y.n_rows;m++){
@@ -101,7 +106,9 @@ sum1.zeros();
 
 
       if(Y(m)>=s[l] & Y(m)<s[l+1]){
-      LogL = LogL + lam[l] + Rates[m]*poi[l]-exp(poi[l]) - cumsumlog(Rates[m]);
+
+        m1=Rates[m];
+      LogL = LogL + lam[l] + Rates[m]*poi[l]-exp(poi[l]) - cumsumlog(m1);
 
         //If interval HAS NONE BIG PENALTY!!!
 
@@ -118,13 +125,13 @@ sum1.zeros();
 
   }
 
-
+if(5<3){
   for(m=0;m<(J+1);m++){
     if(sum1(m)<4){
       LogL = -100000;
     }
   }
-
+}
 
   return(LogL);
 
@@ -186,7 +193,7 @@ arma::vec GetBounds(arma::vec Y, double s1, double s2){
 
 double MinVec(arma::vec Y){
   int J1=Y.n_rows;
-  int j;
+  int j=0;
   double max=Y[0];
   for(j=1;j<J1;j++){
     if(Y[j]<max){
@@ -368,6 +375,7 @@ poi[3]=as_scalar(arma::randn(1));
   double med2=0;
 arma::vec Bounds(2);
 
+double L1=1;
 
 
   int StoreInx=0;
@@ -649,9 +657,11 @@ if(L>0){
       alpha =    Like(Y,Rates, sprop, lamprop ,poiprop, L+1) -    Like(Y,Rates, s, lam ,poi, L);
       //Add proposal ratio
       //Poisson
-      alpha= alpha + log(Poi) - log(L+1);
+      L1=L;
+
+      alpha= alpha + log(Poi) - log(L1+1);
       // S proposal
-      alpha = alpha + log(2*L+3)+log(2*L+2)+log(Birth-s[Spot-1])+log(s[Spot]-Birth);
+      alpha = alpha + log(2*L1+3)+log(2*L1+2)+log(Birth-s[Spot-1])+log(s[Spot]-Birth);
       alpha = alpha - 2*log(m1)-log(s[Spot]-s[Spot-1]);
       //Perturbation
       alpha=alpha-log(U1*(1-U1)) - log(U2*(1-U2));
@@ -790,10 +800,12 @@ if(Spot==1){
       //Prior Ratio
       alpha =    Like(Y,Rates,  sprop, lamprop ,poiprop, L-1) -    Like(Y,Rates, s, lam , poi, L);
 
+
+      L1=L;
       //Poisson
-      alpha = alpha  -log(Poi) + log(L);
+      alpha = alpha  -log(Poi) + log(L1);
       //S Prior
-      alpha = alpha + 2*log(m1) + log(s[Spot+1]-s[Spot-1]) - log(2*L+1) - log(2L) - log(s[Spot]-s[Spot-1])-log(s[Spot+1]-s[Spot]);
+      alpha = alpha + 2*log(m1) + log(s[Spot+1]-s[Spot-1]) - log(2*L1+1) - log(2*L1) - log(s[Spot]-s[Spot-1])-log(s[Spot+1]-s[Spot]);
       //Lambda Prior, we DROPPED one
 
       if(L==1){
