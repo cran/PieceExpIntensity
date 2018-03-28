@@ -105,7 +105,7 @@ double m1=0;
       LogL = LogL - max1(0,min1(s(l+1),Y(m))-s(l))*exp(lam[l]);
 
 
-      if(Y(m)>=s[l] & Y(m)<s[l+1]){
+      if( (Y(m)>=s[l]) && (Y(m)<s[l+1]) ){
 
         m1=Rates[m];
       LogL = LogL + lam[l] + Rates[m]*poi[l]-exp(poi[l]) - cumsumlog(m1);
@@ -239,7 +239,7 @@ int SampleBirth(arma::vec s){
   }else{
 
     for(m=1;m<cumprob.n_rows;m++){
-      if(U>cumprob[m-1] & U<cumprob[m]){
+      if( (U>cumprob[m-1]) && (U<cumprob[m]) ){
         Which1=m;
       }
     }
@@ -390,7 +390,7 @@ double L1=1;
     }
 
 
-    if(m<(B/2 + 1) & m%250==0){
+    if( (m<(B/2 + 1)) && (m%250==0)){
 
 
 
