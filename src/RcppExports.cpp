@@ -6,9 +6,9 @@
 
 using namespace Rcpp;
 
-// PieceExpIntensity1
-List PieceExpIntensity1(arma::vec Y, arma::vec Rates, int B, double Poi);
-RcppExport SEXP PieceExpIntensity_PieceExpIntensity1(SEXP YSEXP, SEXP RatesSEXP, SEXP BSEXP, SEXP PoiSEXP) {
+// PieceExpIntensity2
+List PieceExpIntensity2(arma::vec Y, arma::vec Rates, int B, double Poi);
+RcppExport SEXP PieceExpIntensity_PieceExpIntensity2(SEXP YSEXP, SEXP RatesSEXP, SEXP BSEXP, SEXP PoiSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -16,13 +16,13 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< arma::vec >::type Rates(RatesSEXP);
     Rcpp::traits::input_parameter< int >::type B(BSEXP);
     Rcpp::traits::input_parameter< double >::type Poi(PoiSEXP);
-    rcpp_result_gen = Rcpp::wrap(PieceExpIntensity1(Y, Rates, B, Poi));
+    rcpp_result_gen = Rcpp::wrap(PieceExpIntensity2(Y, Rates, B, Poi));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"PieceExpIntensity_PieceExpIntensity1", (DL_FUNC) &PieceExpIntensity_PieceExpIntensity1, 4},
+    {"PieceExpIntensity_PieceExpIntensity2", (DL_FUNC) &PieceExpIntensity_PieceExpIntensity2, 4},
     {NULL, NULL, 0}
 };
 

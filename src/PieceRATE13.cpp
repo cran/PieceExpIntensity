@@ -260,15 +260,30 @@ int factorial(int N){
   return(cum1);
 }
 
-
-
+//'  C++ Sampling Function for MCMC
+//'
+//' C++ Sampling Function used in the PieceExpIntensity function.
+//' @param Y   Vector containing observed event times.
+//' @param Rates Vector containing poisson count intensities.
+//' @param B Number of iterations to run the MCMC with half burned in.
+//' @param Poi Prior mean number of split points,
+//' @return A list of all posterior quantities.
+//' @examples
+//' B=1000
+//' n=100
+//' Y=rexp(n,1)
+//' Rates=Y
+//' Rates[Y<.5]=rpois(sum(Y<.5),20)
+//' Rates[Y>.5]=rpois(sum(Y>.5),3)
+//' Poi=10
+//' PieceExpIntensity2(Y,Rates,B,Poi)
+//' @export
 //[[Rcpp::export]]
-List PieceExpIntensity1( arma::vec Y, //Survival Times
+List PieceExpIntensity2( arma::vec Y, //Survival Times
                 arma::vec Rates, //Number of casualties/etc at each event time
                 int B, // Number of iterations to perform
                 double Poi
 ){
-
 
 
   //Prior Params, make user controlled later
@@ -380,6 +395,7 @@ double L1=1;
 
   int StoreInx=0;
 
+
   for(m=0;m<B;m++){
 
     if(m%1000==0){
@@ -387,31 +403,6 @@ double L1=1;
       Bounds[1]=m;
       Rf_PrintValue(wrap(Bounds));
       Rprintf("Iterations");
-    }
-
-
-    if( (m<(B/2 + 1)) && (m%250==0)){
-
-
-
-
-
-
-      //svar
-      if(Ints/Nums>.8){
-        svar=svar*2;
-      }
-
-      if(Ints/Nums<.2){
-        svar=svar/2;
-      }
-
-      Ints=1;
-      Nums=2;
-
-
-
-
     }
 
 
@@ -559,8 +550,6 @@ if(L>0){
     for(j=1; j<(L+1); j++){
       sprop = s;
       //Draw new proposal for s_j, but make sure it's between s_j and s_j+1
-      //Draws unif[-c,c] proposal addition
-    //  sprop[j]=max1(min1(as_scalar(arma::randu(1))*2*svar-svar+sprop[j],sprop[j+1]-.01),sprop[j-1]+.01);
        sprop[j]=as_scalar(arma::randu(1))*(sprop[j+1]-sprop[j-1])+sprop[j-1];
 
 
@@ -579,10 +568,8 @@ if(L>0){
       if(U<alpha){
 
         s=sprop;
-        Ints = Ints+1;
       }
 
-      Nums = Nums+1;
 
 
 
@@ -659,7 +646,7 @@ if(L>0){
       //Poisson
       L1=L;
 
-      alpha= alpha + log(Poi) - log(L1+1);
+  //    alpha= alpha + log(Poi) - log(L1+1);
       // S proposal
       alpha = alpha + log(2*L1+3)+log(2*L1+2)+log(Birth-s[Spot-1])+log(s[Spot]-Birth);
       alpha = alpha - 2*log(m1)-log(s[Spot]-s[Spot-1]);
@@ -803,7 +790,7 @@ if(Spot==1){
 
       L1=L;
       //Poisson
-      alpha = alpha  -log(Poi) + log(L1);
+    //  alpha = alpha  -log(Poi) + log(L1);
       //S Prior
       alpha = alpha + 2*log(m1) + log(s[Spot+1]-s[Spot-1]) - log(2*L1+1) - log(2*L1) - log(s[Spot]-s[Spot-1])-log(s[Spot+1]-s[Spot]);
       //Lambda Prior, we DROPPED one

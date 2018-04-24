@@ -29,7 +29,7 @@ Y=X
 Y[X<.5]=rpois(sum(X<.5),20)
 Y[X>.5]=rpois(sum(X>.5),3)
 Poi=10
-PieceExpIntensity1(X,Y,B,Poi)
+PieceExpIntensity(X,Y,B,Poi)
 }
 \references{
 Chapple (2017). Modeling ISIL terror attacks and their intensities via flexible Bayesian piecewise models. Currently Under Review.

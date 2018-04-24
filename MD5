@@ -1,9 +1,8 @@
-c777c6a752f65d2cdde3303b6396ba9f *DESCRIPTION
-083695acd1b39d8f8f55df85d82035cb *NAMESPACE
-1063b4ac6ec80134e631d673472533f8 *R/PieceExpIntensity.R
-39b506f3e1ede13c98b13fbcc87e5fe6 *R/PieceExpIntensity1.R
-721f51ae452dcbaf01d34b5a9ba9ce0e *R/RcppExports.R
-2f2a16383b82fb8d487185b2297585db *man/PieceExpIntensity.Rd
-945fbfb0df864a69a2c9fcb99e2a3a3d *man/PieceExpIntensity1.Rd
-175982315301d1849883d02c79f83ef1 *src/PieceRATE13.cpp
-7025e682d57b5ce9a05c67186afd0078 *src/RcppExports.cpp
+0ca43623bff0c71cb44fb2bf84171743 *DESCRIPTION
+801645aa4f203a68ee7fdc05329000fe *NAMESPACE
+1bb366f9e7db60801671ba338f20ab15 *R/PieceExpIntensity.R
+cc1e77920c13c1098d26600a4609e4b3 *R/RcppExports.R
+739d3396495ca9915311159f2679f3b9 *man/PieceExpIntensity.Rd
+7d5814fd6f60bbdad0ff00f09c444e65 *man/PieceExpIntensity2.Rd
+e2307a5dacd7bb901485c177b24565cf *src/PieceRATE13.cpp
+534b270eabab7afb5cf339af561fdf2c *src/RcppExports.cpp

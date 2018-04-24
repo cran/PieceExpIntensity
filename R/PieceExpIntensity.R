@@ -18,7 +18,7 @@
 #' Y[X<.5]=rpois(sum(X<.5),20)
 #' Y[X>.5]=rpois(sum(X>.5),3)
 #' Poi=10
-#' PieceExpIntensity1(X,Y,B,Poi)
+#' PieceExpIntensity(X,Y,B,Poi)
 #' @export
 PieceExpIntensity=function(X,Y,B,Poi){
 
@@ -34,7 +34,11 @@ PieceExpIntensity=function(X,Y,B,Poi){
       return(NULL)
     }else{
 
-G1=PieceExpIntensity1(X,Y,B,Poi)
+      cat("Ok Lets Go")
+
+
+
+G1=PieceExpIntensity2(X,Y,B,Poi)
 
 ##Now Get the mode and return some stuff
 
